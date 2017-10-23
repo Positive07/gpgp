@@ -41,8 +41,8 @@ function LayerPicker:generateMenu()
   --cosmetic
   self.canvas     = love.graphics.newCanvas()
   self.background = love.graphics.newCanvas()
-  self.background:clear(Color.AlmostBlack)
   self.background:renderTo(function()
+    love.graphics.clear(Color.AlmostBlack)
     local gaussianblur      = require('lib.shine').gaussianblur()
     gaussianblur.parameters = {sigma = 5}
     gaussianblur:draw(function()
