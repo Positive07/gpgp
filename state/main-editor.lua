@@ -49,7 +49,7 @@ function MainEditor:keypressed(key)
   end
 
   --open palette
-  if key == ' ' then
+  if key == 'space' then
     self.selectedLayer:openPalette()
   end
 
@@ -94,6 +94,10 @@ function MainEditor:keypressed(key)
       Gamestate.push(require('state.level-picker'))
     end
   end
+end
+
+function MainEditor:wheelmoved(x, y)
+  self.grid:wheelmoved(x, y, button)
 end
 
 function MainEditor:mousepressed(x, y, button)

@@ -50,14 +50,9 @@ function ScrollArea:update(dt)
   end
 end
 
-function ScrollArea:mousepressed(x, y, button)
+function ScrollArea:wheelmoved(x, y)
   if Mouse:within(self.pos, self.size) then
-    if button == 'wd' then
-      self.scrollbar:setValue(self.scrollbar:getValue() + .1)
-    end
-    if button == 'wu' then
-      self.scrollbar:setValue(self.scrollbar:getValue() - .1)
-    end
+    self.scrollbar:setValue(self.scrollbar:getValue() + y * .1)
   end
 end
 

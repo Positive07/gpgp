@@ -80,9 +80,9 @@ function LayerPicker:keypressed(key)
   end
 end
 
-function LayerPicker:mousepressed(x, y, button)
-  self.groupMenu:mousepressed(x, y, button)
-  self.layerMenu:mousepressed(x, y, button)
+function LayerPicker:wheelmoved(x, y)
+  self.groupMenu:wheelmoved(x, y)
+  self.layerMenu:wheelmoved(x, y)
 end
 
 function LayerPicker:update(dt)
@@ -95,8 +95,8 @@ function LayerPicker:draw()
   love.graphics.setColor(150, 150, 150)
   love.graphics.draw(self.background)
 
-  self.canvas:clear(0, 0, 0, 0)
   self.canvas:renderTo(function()
+    love.graphics.clear(0, 0, 0, 0)
     love.graphics.setColor(Color.AlmostWhite)
     love.graphics.setFont(Font.Big)
     love.graphics.print('Groups', 10, 10)

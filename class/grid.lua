@@ -49,7 +49,7 @@ function Grid:update(dt)
   local hasMouseFocus = Mouse:within(self.scissor.pos, self.scissor.size)
 
   --panning with mouse
-  if hasMouseFocus and love.mouse.isDown 'm' then
+  if hasMouseFocus and love.mouse.isDown '3' then
     self.pan = self.pan - Mouse:getDelta() / self.displayScale
   end
 
@@ -82,8 +82,8 @@ function Grid:update(dt)
     local relativeMousePos = self:getRelativeMousePos()
     self.cursor.x          = math.floor(relativeMousePos.x, self.snap) + 1
     self.cursor.y          = math.floor(relativeMousePos.y, self.snap) + 1
-    local c1 = love.mouse.isDown('l') and self.selectMode == 1
-    local c2 = love.mouse.isDown('r') and self.selectMode == 2
+    local c1 = love.mouse.isDown('1') and self.selectMode == 1
+    local c2 = love.mouse.isDown('2') and self.selectMode == 2
     if self.selectionA and (c1 or c2) then
       self.selectionB   = self.cursor:clone()
       self.selectionB.x = math.clamp(self.selectionB.x, 1, self.size.x)
@@ -94,28 +94,30 @@ end
 
 function Grid:mousepressed(x, y, button)
   if Mouse:within(self.scissor.pos, self.scissor.size) then
-    if (button == 'l' or button == 'r') and self:getCursorWithinMap() then
-      if button == 'l' then
+    if (button == '1' or button == '2') and self:getCursorWithinMap() then
+      if button == '1' then
         self.selectMode = 1
       end
-      if button == 'r' then
+      if button == '2' then
         self.selectMode = 2
       end
       self.selectionA = self.cursor:clone()
     end
+  end
+end
 
-    if button == 'wu' then
-      self.scale = self.scale * 1.1
-    end
-    if button == 'wd' then
-      self.scale = self.scale / 1.1
-    end
+function Grid:wheelmoved(x, y)
+  local amount = 1.1 * math.abs(y)
+  if y > 0 then
+    self.scale = self.scale * amount
+  else
+    self.scale = self.scale / amount
   end
 end
 
 function Grid:mousereleased(x, y, button)
-  local c1 = button == 'l' and self.selectMode == 1
-  local c2 = button == 'r' and self.selectMode == 2
+  local c1 = button == '1' and self.selectMode == 1
+  local c2 = button == '2' and self.selectMode == 2
   if (c1 or c2) then
     if self.selectionA and self.selectionB then
       local x1, x2 = math.smaller(self.selectionA.x, self.selectionB.x)

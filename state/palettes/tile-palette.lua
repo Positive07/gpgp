@@ -27,9 +27,13 @@ function TilePalette:update(dt)
 end
 
 function TilePalette:keypressed(key)
-  if key == ' ' or key == 'escape' then
+  if key == 'space' or key == 'escape' then
     Gamestate.pop()
   end
+end
+
+function TilePalette:wheelmoved(x, y)
+  self.grid:wheelmoved(x, y)
 end
 
 function TilePalette:mousepressed(x, y, button)

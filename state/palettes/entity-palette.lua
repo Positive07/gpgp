@@ -53,8 +53,8 @@ function EntityPalette:generateMenu()
   --cosmetic
   self.canvas     = lg.newCanvas()
   self.background = lg.newCanvas()
-  self.background:clear(Color.AlmostBlack)
   self.background:renderTo(function()
+    love.graphics.clear(Color.AlmostBlack)
     local gaussianblur      = require('lib.shine').gaussianblur()
     gaussianblur.parameters = {sigma = 5}
     gaussianblur:draw(function()
@@ -64,13 +64,13 @@ function EntityPalette:generateMenu()
 end
 
 function EntityPalette:keypressed(key)
-  if key == ' ' or key == 'escape' then
+  if key == 'space' or key == 'escape' then
     Gamestate.pop()
   end
 end
 
-function EntityPalette:mousepressed(x, y, button)
-  self.scrollArea:mousepressed(x, y, button)
+function EntityPalette:wheelmoved(x, y)
+  self.scrollArea:wheelmoved(x, y)
 end
 
 function EntityPalette:resize()

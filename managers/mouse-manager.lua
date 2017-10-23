@@ -11,9 +11,9 @@ function Mouse:update(dt)
   posPrev   = pos
   pos       = vector(love.mouse.getX(), love.mouse.getY())
   leftPrev  = left
-  left      = love.mouse.isDown('l')
+  left      = love.mouse.isDown('1')
   rightPrev = right
-  right     = love.mouse.isDown('r')
+  right     = love.mouse.isDown('2')
 end
 
 function Mouse:leftPressed() return left and (not leftPrev) end

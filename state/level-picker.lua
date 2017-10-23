@@ -42,8 +42,8 @@ function LevelPicker:generateMenu()
   self.canvas = love.graphics.newCanvas()
   if self.previous == require('state.main-editor') then
     self.background = love.graphics.newCanvas()
-    self.background:clear(Color.AlmostBlack)
     self.background:renderTo(function()
+      love.graphics.clear(Color.AlmostBlack)
       local gaussianblur      = require('lib.shine').gaussianblur()
       gaussianblur.parameters = {sigma = 5}
       gaussianblur:draw(function()
@@ -68,8 +68,8 @@ function LevelPicker:keypressed(key)
   end
 end
 
-function LevelPicker:mousepressed(x, y, button)
-  self.menu:mousepressed(x, y, button)
+function LevelPicker:wheelmoved(x, y)
+  self.menu:wheelmoved(x, y)
 end
 
 function LevelPicker:draw()
@@ -78,8 +78,8 @@ function LevelPicker:draw()
     love.graphics.draw(self.background)
   end
 
-  self.canvas:clear(0, 0, 0, 0)
   self.canvas:renderTo(function()
+    love.graphics.clear(0, 0, 0, 0)
     love.graphics.setColor(Color.AlmostWhite)
     love.graphics.setFont(Font.Big)
     love.graphics.print('Open file...', 10, 10)
