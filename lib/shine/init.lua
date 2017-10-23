@@ -101,11 +101,11 @@ return setmetatable({}, {__index = function(self, key)
 	end
 
 	setmetatable(effect, shine)
-	for _, v in ipairs(effect.requires) do
+	--[[for _, v in ipairs(effect.requires) do
 		if not love.graphics.isSupported(v) then
 			error(v.." not supported by the graphics card", 2)
 		end
-	end
+	end]]
 
 	local constructor = function(t)
 		local instance = {}
